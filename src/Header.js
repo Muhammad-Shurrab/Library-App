@@ -1,79 +1,60 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
-  return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">
-        Navbar
-      </a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  const navigate = useNavigate();
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
-              Home <span class="sr-only">(current)</span>
-            </a>
+  // Check if a specific user is logged in (replace with your specific logic)
+  const isLoggedIn = localStorage.getItem("users") !== null;
+
+  const handleLogout = () => {
+    localStorage.removeItem("users");
+    // Redirect to home page after logout
+    navigate("/");
+  };
+
+  return (
+    <div className="container">
+      <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a
+          href="/"
+          className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
+        >
+          <span className="fs-4">Library Management App</span>
+        </a>
+
+        <ul className="nav nav-pills">
+          <li className="nav-item">
+            <Link to="/" className="nav-link active" aria-current="page">
+              Home
+            </Link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Link
-            </a>
+          <li className="nav-item">
+            <Link to="/about" className="nav-link">
+              About
+            </Link>
           </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              id="navbarDropdown"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">
-                Action
-              </a>
-              <a class="dropdown-item" href="#">
-                Another action
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                Something else here
-              </a>
-            </div>
+          <li className="nav-item">
+            <Link to="/contact" className="nav-link">
+              Contact
+            </Link>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">
-              Disabled
-            </a>
+          {/* Conditional rendering for Signup/Logout */}
+          <li className="nav-item">
+            {isLoggedIn ? (
+              <button className="nav-link btn btn-link" onClick={handleLogout}>
+                Logout
+              </button>
+            ) : (
+              <Link to="/signup" className="nav-link">
+                Signup
+              </Link>
+            )}
           </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
-      </div>
-    </nav>
+      </header>
+    </div>
   );
 }
+
 export default Header;

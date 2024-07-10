@@ -1,35 +1,56 @@
 import React from "react";
-import initState from "./Object";
+import initState from "./object"; // Assuming this is where your initial state (list of books) is imported
 
 function Main() {
   const cardStyles = {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+    gap: "20px",
+    padding: "20px",
   };
 
   const cardItemStyles = {
-    width: "300px",
-    margin: "10px",
     padding: "15px",
     borderRadius: "8px",
     boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
     background: "linear-gradient(to bottom right, #ff5e62, #ff9966)",
     color: "#ffffff",
+    textDecoration: "none",
+    transition: "transform 0.3s ease-in-out",
+    minHeight: "200px",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+  };
+
+  const cardTitleStyles = {
+    fontSize: "1.5rem",
+    fontWeight: "bold",
+    marginBottom: "10px",
+  };
+
+  const cardDetailStyles = {
+    fontSize: "1rem",
+    marginBottom: "5px",
   };
 
   return (
-    <div style={cardStyles}>
-      {initState.books.map((element) => (
-        <div key={element.isbn} style={cardItemStyles}>
-          <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
-            {/* Icon or any other content */}
-          </div>
-          <h3 className="fs-2 text-body-emphasis">{element.title}</h3>
-          <p>Author: {element.author}</p>
-          <p>ISBN: {element.isbn}</p>
-        </div>
-      ))}
+    <div>
+      <div style={cardStyles}>
+        {initState.books.map((element) => (
+          <a key={element.isbn} href="#" style={cardItemStyles}>
+            <div className="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3">
+              {/* Icon or any other content */}
+            </div>
+            <div>
+              <h3 style={cardTitleStyles}>{element.Title}</h3>
+              <p style={cardDetailStyles}>Author: {element.author}</p>
+              <p style={cardDetailStyles}>ISBN: {element.isbn}</p>
+            </div>
+            <p style={{ marginTop: "auto" }}>More details</p>
+          </a>
+        ))}
+      </div>
     </div>
   );
 }
