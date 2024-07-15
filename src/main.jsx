@@ -1,16 +1,10 @@
-import React from "react";
-import gallery from "./books";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.jsx'
+import './index.css'
 
-function Main() {
-  gallery.books.map((element) => {
-    return (
-      <div className="books">
-        <h2>{element.title}</h2>
-        <p className="auther-name">{element.author}</p>
-        <p className="isbn">{element.isbn}</p>
-      </div>
-    );
-  });
-}
-
-export default Main;
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
